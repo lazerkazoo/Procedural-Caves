@@ -1,7 +1,11 @@
 import random
 
-grid_size = (32, 32)
-grid = []
+
+def init_caves():
+    for x in range(grid_size[0]):
+        grid.append([0])
+        for y in range(grid_size[1]):
+            grid[x].append(0)
 
 
 def print_generated():
@@ -73,13 +77,13 @@ def clean_up():
     return new_grid
 
 
-for x in range(grid_size[0]):
-    grid.append([0])
-    for y in range(grid_size[1]):
-        grid[x].append(0)
+grid_size = (64, 64)
+grid = []
 
+init_caves()
 grid = remove_random()
 for i in range(10):
     grid = get_neighbors()
     grid = clean_up()
+grid = get_neighbors()
 print_generated()
