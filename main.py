@@ -25,7 +25,7 @@ def remove_random():
     new_grid = grid
     for i, x in enumerate(grid):
         for j, y in enumerate(x):
-            if random.random() > 0.7:
+            if random.random() > 0.8:
                 new_grid[i][j] = ""
 
     return new_grid
@@ -71,7 +71,7 @@ def clean_up():
             if not isinstance(grid[i][j], int):
                 continue
 
-            if grid[i][j] <= 3:
+            if grid[i][j] <= 4:
                 new_grid[i][j] = ""
 
     return new_grid
@@ -90,13 +90,11 @@ init_caves()
 
 grid = remove_random()
 
-smoothness = input(
-    "smoothness [nums > 1000 will be kinda slow, 100 recommended] [just press enter for 100] -> "
-)
+smoothness = input("smoothness [just press enter for 7] -> ")
 try:
     smoothness = int(smoothness)
 except Exception:
-    smoothness = 100
+    smoothness = 7
 
 for i in range(smoothness):
     grid = get_neighbors()
