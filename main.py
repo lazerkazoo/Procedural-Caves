@@ -1,12 +1,10 @@
 import random
 
-from inkex.paths import smooth
-
 
 def init_caves():
-    for x in range(grid_size[0]):
+    for x in range(grid_size):
         grid.append([0])
-        for y in range(grid_size[1]):
+        for y in range(grid_size):
             grid[x].append(0)
 
 
@@ -47,8 +45,8 @@ def get_neighbors():
         (1, 1),
     ]
 
-    for i in range(grid_size[0]):
-        for j in range(grid_size[1]):
+    for i in range(grid_size):
+        for j in range(grid_size):
             if not isinstance(grid[i][j], int):
                 continue
 
@@ -57,7 +55,7 @@ def get_neighbors():
                 ni = i + di
                 nj = j + dj
 
-                if 0 <= ni < grid_size[0] and 0 <= nj < grid_size[1]:
+                if 0 <= ni < grid_size and 0 <= nj < grid_size:
                     if isinstance(grid[ni][nj], int):
                         neighbors += 1
 
@@ -68,8 +66,8 @@ def get_neighbors():
 
 def clean_up():
     new_grid = grid
-    for i in range(grid_size[0]):
-        for j in range(grid_size[1]):
+    for i in range(grid_size):
+        for j in range(grid_size):
             if not isinstance(grid[i][j], int):
                 continue
 
@@ -79,13 +77,21 @@ def clean_up():
     return new_grid
 
 
-grid_size = (64, 64)
-grid = []
+size = input(
+    "sqrt of grid size [nums > 100 will be hard to see, 64 recommeded], [just press enter for 64] -> "
+)
+try:
+    grid_size = int(size)
+except Exception:
+    grid_size = 64
 
+grid = []
 init_caves()
+
 grid = remove_random()
+
 smoothness = input(
-    "smoothness [nums > 1000 will be slow, 100 recommended] [just press enter for 100] -> "
+    "smoothness [nums > 1000 will be kinda slow, 100 recommended] [just press enter for 100] -> "
 )
 try:
     smoothness = int(smoothness)
