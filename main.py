@@ -1,5 +1,7 @@
 import random
 
+from inkex.paths import smooth
+
 
 def init_caves():
     for x in range(grid_size[0]):
@@ -82,7 +84,15 @@ grid = []
 
 init_caves()
 grid = remove_random()
-for i in range(10):
+smoothness = input(
+    "smoothness [nums > 1000 will be slow, 100 recommended] [just press enter for 100] -> "
+)
+try:
+    smoothness = int(smoothness)
+except Exception:
+    smoothness = 100
+
+for i in range(smoothness):
     grid = get_neighbors()
     grid = clean_up()
 grid = get_neighbors()
