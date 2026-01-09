@@ -3,9 +3,9 @@ import random
 
 def init_caves():
     for x in range(grid_size):
-        grid.append([0])
+        grid.append([1])
         for y in range(grid_size):
-            grid[x].append(0)
+            grid[x].append(1)
 
 
 def print_generated():
@@ -22,18 +22,13 @@ def print_generated():
 
 
 def remove_random():
-    new_grid: list[list] = grid
     for i, x in enumerate(grid):
         for j, y in enumerate(x):
             if random.random() > 0.8:
-                new_grid[i][j] = ""
-
-    return new_grid
+                grid[i][j] = 0
 
 
 def get_neighbors():
-    new_grid = grid
-
     directions = [
         (-1, -1),
         (-1, 0),
@@ -47,7 +42,7 @@ def get_neighbors():
 
     for i in range(grid_size):
         for j in range(grid_size):
-            if not isinstance(grid[i][j], int):
+            if not grid[i][j] > 0:
                 continue
 
             neighbors = 0
@@ -56,25 +51,20 @@ def get_neighbors():
                 nj = j + dj
 
                 if 0 <= ni < grid_size and 0 <= nj < grid_size:
-                    if isinstance(grid[ni][nj], int):
+                    if grid[ni][nj] > 0:
                         neighbors += 1
 
-            new_grid[i][j] = neighbors
-
-    return new_grid
+            grid[i][j] = neighbors
 
 
 def clean_up():
-    new_grid: list[list] = grid
     for i in range(grid_size):
         for j in range(grid_size):
             if not isinstance(grid[i][j], int):
                 continue
 
             if grid[i][j] <= 4:
-                new_grid[i][j] = ""
-
-    return new_grid
+                grid[i][j] = 0
 
 
 size = input(
@@ -92,12 +82,12 @@ except Exception:
 
 grid: list[list] = []
 init_caves()
-
-grid = remove_random()
+remove_random()
 
 
 for i in range(openness):
-    grid = get_neighbors()
-    grid = clean_up()
-grid = get_neighbors()
+    get_neighbors()
+    clean_up()
+get_neighbors()
+
 print_generated()
