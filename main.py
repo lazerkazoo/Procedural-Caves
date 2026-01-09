@@ -84,17 +84,17 @@ try:
     grid_size = int(size)
 except Exception:
     grid_size = 64
+openness = input("openness [just press enter for 6] -> ")
+try:
+    openness = int(openness)
+except Exception:
+    openness = 6
 
 grid: list[list] = []
 init_caves()
 
 grid = remove_random()
 
-openness = input("openness [just press enter for 6] -> ")
-try:
-    openness = int(openness)
-except Exception:
-    openness = 6
 
 for i in range(openness):
     grid = get_neighbors()
