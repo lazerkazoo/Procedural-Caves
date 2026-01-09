@@ -90,13 +90,13 @@ init_caves()
 
 grid = remove_random()
 
-smoothness = input("smoothness [just press enter for 7] -> ")
+openness = input("openness [just press enter for 10] -> ")
 try:
-    smoothness = int(smoothness)
+    openness = int(openness)
 except Exception:
-    smoothness = 7
+    openness = 10
 
-for i in range(smoothness):
+for i in range(openness):
     grid = get_neighbors()
     grid = clean_up()
 grid = get_neighbors()
