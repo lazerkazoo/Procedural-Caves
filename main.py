@@ -22,7 +22,7 @@ def print_generated():
 
 
 def remove_random():
-    new_grid = grid
+    new_grid: list[list] = grid
     for i, x in enumerate(grid):
         for j, y in enumerate(x):
             if random.random() > 0.8:
@@ -65,7 +65,7 @@ def get_neighbors():
 
 
 def clean_up():
-    new_grid = grid
+    new_grid: list[list] = grid
     for i in range(grid_size):
         for j in range(grid_size):
             if not isinstance(grid[i][j], int):
@@ -78,23 +78,23 @@ def clean_up():
 
 
 size = input(
-    "sqrt of grid size [nums > 100 will be hard to see, 64 recommeded], [just press enter for 64] -> "
+    "grid size [nums > 100 will be hard to see, 64 recommeded], [just press enter for 64] -> "
 )
 try:
     grid_size = int(size)
 except Exception:
     grid_size = 64
 
-grid = []
+grid: list[list] = []
 init_caves()
 
 grid = remove_random()
 
-openness = input("openness [just press enter for 10] -> ")
+openness = input("openness [just press enter for 6] -> ")
 try:
     openness = int(openness)
 except Exception:
-    openness = 10
+    openness = 6
 
 for i in range(openness):
     grid = get_neighbors()
